@@ -21,7 +21,6 @@ import CommentThread from './components/CommentThread.vue'
   --neutral-light-gray: hsl(223, 19%, 93%);
   --neutral-very-light-gray: hsl(228, 33%, 97%);
   --neutral-white: hsl(0, 0%, 100%);
-
   --mobile-width: 375px;
   --desktop-width: 1440px;
 }

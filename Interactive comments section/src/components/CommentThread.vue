@@ -16,11 +16,23 @@ defineProps<{
         :score="comment.score"
         :user="comment.user"
       />
+      <div v-if="comment.replies.length" class="reply-wrapper">
+        <div v-for="reply in comment.replies" :key="reply.id">
+          <SingleComment
+            :content="reply.content"
+            :createdAt="reply.createdAt"
+            :score="reply.score"
+            :user="reply.user"
+            :replyingTo="reply.replyingTo"
+            class="reply"
+          />
+        </div>
+      </div>
     </div>
     <div class="card">
-      <img :src="commentsData.currentUser.image.png" alt="" />
+      <img :src="commentsData.currentUser.image.webp" alt="" />
       <p>{{ commentsData.currentUser.username }}</p>
-      <pre>{{ commentsData }}</pre>
+      <!-- <pre>{{ commentsData }}</pre> -->
     </div>
   </div>
 </template>
@@ -46,6 +58,23 @@ h3 {
   .greetings h1,
   .greetings h3 {
     text-align: left;
+  }
+}
+
+.reply-wrapper {
+  margin-block-end: 16px;
+}
+.comment.reply {
+  margin-inline-start: 64px;
+  position: relative;
+  &::before {
+    content: '';
+    background-color: var(--neutral-light-gray);
+    display: block;
+    width: 0.25rem;
+    position: absolute;
+    height: 111%;
+    translate: -56px -26px;
   }
 }
 </style>
