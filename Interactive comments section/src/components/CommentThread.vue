@@ -29,6 +29,8 @@ const updateCommentstoLocalStorage = () => {
     localStorage.setItem('comments', JSON.stringify(commentsData))
     JSON.parse(localStorage.getItem('comments') as string)
   }
+  localStorage.setItem('comments', JSON.stringify(commentsData))
+  JSON.parse(localStorage.getItem('comments') as string)
 }
 const newComment = ref({
   content: '',
@@ -37,14 +39,18 @@ const newComment = ref({
   replyingTo: '',
   user: commentsData.currentUser,
   replies: [],
-  id: CommentsLocal ? CommentsLocal.comments.length + 1 : 348
+  id: Math.floor(Math.random() * 10)
 })
+const newCommentTextarea = document.querySelector('textarea')
+console.log(newCommentTextarea?.value)
 
 const addComment = () => {
   CommentsLocal.comments.push(newComment.value)
   console.log(newComment.value)
   updateCommentstoLocalStorage()
+
   newComment.value.content = ''
+  //   newCommentTextarea = ''
 }
 
 addCommentstoLocalStorage()
@@ -60,6 +66,7 @@ addCommentstoLocalStorage()
           :createdAt="comment.createdAt"
           :score="comment.score"
           :user="comment.user"
+          :id="comment.id"
         />
         <div v-if="comment.replies.length" class="reply-wrapper">
           <div v-for="reply in comment.replies" :key="reply.id">
@@ -69,6 +76,7 @@ addCommentstoLocalStorage()
               :score="reply.score"
               :user="reply.user"
               :replyingTo="reply.replyingTo"
+              :id="comment.id"
               class="reply"
             />
           </div>
@@ -81,8 +89,8 @@ addCommentstoLocalStorage()
             :alt="commentsData.currentUser.username"
           />
           <textarea
-            name="newComment"
-            id="newComment"
+            name="newCommentTextarea"
+            id="newCommentTextarea"
             cols="30"
             rows="3"
             placeholder="Add a comment..."

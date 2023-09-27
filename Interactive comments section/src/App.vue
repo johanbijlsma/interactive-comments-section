@@ -4,7 +4,7 @@ import CommentThread from './components/CommentThread.vue'
 
 <template>
   <main>
-    <h1>blabla</h1>
+    <h1>Comments Assignment</h1>
     <CommentThread msg="Interactive comments section" />
   </main>
 </template>

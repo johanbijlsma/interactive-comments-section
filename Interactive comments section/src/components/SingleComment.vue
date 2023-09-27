@@ -31,7 +31,7 @@
       </div>
       <div class="main">
         <span v-if="replyingTo" class="replying-to">@{{ replyingTo }}</span>
-        {{ content }}
+        {{ content.length == 0 ? 'Add a comment...' : content }}
       </div>
     </div>
   </div>
@@ -44,6 +44,7 @@ import commentsData from './../data.json'
 const props = defineProps<{
   content: string
   createdAt: string
+  id: number
   user: {
     image: {
       webp: string
@@ -56,6 +57,7 @@ const props = defineProps<{
 }>()
 
 const CommentScore = ref(props.score)
+const CommentID = ref(props.id)
 
 const increaseVote = () => {
   CommentScore.value += 1
